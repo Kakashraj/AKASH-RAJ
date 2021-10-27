@@ -1,0 +1,14 @@
+#include<stdio.h>
+#include<conio.h>
+int user_input(char);
+void main()
+{
+ clrscr();
+ printf("the ASCII value:,%d\n",user_input('s'));
+ printf("the Character is:%c",user_input('s'));
+ getch();
+}
+int user_input(char c)
+{
+ return(c);
+ }
