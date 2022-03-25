@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main()
+{
+    float unit ,cost;
+    while(1)
+    {
+    printf("\nEnter the usage of unit:");
+    scanf("%f",&unit);
+    if(unit<=0&&unit>100)
+    { 
+        printf(" No cost");
+    }
+    else if(unit>=100&&unit<=300)
+    {
+        cost = unit*10;
+    }
+    else if(unit>=300&&unit<=500)
+    {
+    cost = unit*12;
+    }
+    else if(unit>= 500)
+    {
+        cost  = unit*20;
+    }
+    printf(" The electric bill for this month is:%0.2f",cost);
+    }
+        
+    return 0;
+}
