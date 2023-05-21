@@ -1,0 +1,52 @@
+#include <Servo.h>
+
+const int triggerPin = 9;
+const int echoPin = 10;
+const int motorPin = 11;
+
+Servo motor;
+int motorSpeed = 0;
+
+void setup() {
+  pinMode(triggerPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  motor.attach(motorPin);
+  motor.write(motorSpeed);
+  Serial.begin(9600);
+}
+
+void loop() {
+  long duration, distance;
+  
+  // Send ultrasonic pulse
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+
+  // Measure the echo response time
+  duration = pulseIn(echoPin, HIGH);
+  
+  // Calculate the distance in centimeters
+  distance = duration * 0.034 / 2;
+  
+  // Adjust motor speed based on distance
+  if (distance < 30) {
+    motorSpeed = 50; // Set lower speed if object is near
+  } else if (distance > 100) {
+    motorSpeed = 550; // Set higher speed if object is far
+  } else {
+    motorSpeed = 200; // Set medium speed otherwise
+  }
+  
+  // Update motor speed
+  motor.write(motorSpeed);
+  
+  // Print distance to Serial Monitor
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+  
+  delay(100); // Adjust delay as needed
+}
